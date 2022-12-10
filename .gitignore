@@ -2,6 +2,14 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+.idea/
 
 ### Eclipse ###
 .apt_generated
