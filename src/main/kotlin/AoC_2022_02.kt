@@ -5,24 +5,32 @@ import java.io.FileReader
 class AoC_2022_02 (private val input: String) {
 
     private var score = 0
+    private var secondScore = 0
+    private var roundCounter = 1
 
     fun execute() {
         val file = File(input)
 
-        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeScore) }
+        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeScores) }
     }
 
     fun getFinalScore(): Int {
         return this.score
     }
 
-    private fun computeScore(line: String) {
+    fun getSecondScore(): Int {
+        return this.secondScore
+    }
+
+    private fun computeScores(line: String) {
         val choices = line.split(' ')
 
         val firstChoice = FirstChoice.valueOf(choices[0])
         val secondChoice = SecondChoice.valueOf(choices[1])
+        val roundState = RoundState.valueOf(choices[1])
 
         updateScore(firstChoice, secondChoice)
+        updateSecondScore(firstChoice, roundState)
     }
 
     private fun updateScore(firstChoice: FirstChoice, secondChoice: SecondChoice) {
@@ -37,15 +45,15 @@ class AoC_2022_02 (private val input: String) {
             FirstChoice.A -> {
                 return when (secondChoice) {
                     SecondChoice.X -> {
-                        RoundState.DRAW
+                        RoundState.Z
                     }
 
                     SecondChoice.Y -> {
-                        RoundState.WIN
+                        RoundState.X
                     }
 
                     SecondChoice.Z -> {
-                        RoundState.LOSS
+                        RoundState.Y
                     }
                 }
             }
@@ -53,67 +61,137 @@ class AoC_2022_02 (private val input: String) {
             FirstChoice.B -> {
                 return when (secondChoice) {
                     SecondChoice.X -> {
-                        RoundState.LOSS
+                        RoundState.Y
                     }
 
                     SecondChoice.Y -> {
-                        RoundState.DRAW
+                        RoundState.Z
                     }
 
                     SecondChoice.Z -> {
-                        RoundState.WIN
+                        RoundState.X
+                    }
+                }
+            }
+
+            FirstChoice.C -> {
+                return when (secondChoice) {
+                    SecondChoice.X -> {
+                        RoundState.X
+                    }
+
+                    SecondChoice.Y -> {
+                        RoundState.Y
+                    }
+
+                    SecondChoice.Z -> {
+                        RoundState.Z
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateSecondScore(firstChoice: FirstChoice, outcome: RoundState) {
+        this.secondScore += outcome.getScore() + reverseEngineerChoice(firstChoice, outcome).getScore()
+        this.roundCounter++
+    }
+
+    private fun reverseEngineerChoice(
+        firstChoice: FirstChoice,
+        outcome: RoundState
+    ): SecondChoice {
+        when (firstChoice) {
+            FirstChoice.A -> {
+                return when (outcome) {
+                    RoundState.X -> {
+                        SecondChoice.Z
+                    }
+
+                    RoundState.Y -> {
+                        SecondChoice.X
+                    }
+
+                    RoundState.Z -> {
+                        SecondChoice.Y
+                    }
+                }
+            }
+
+            FirstChoice.B -> {
+                return when (outcome) {
+                    RoundState.X -> {
+                        SecondChoice.X
+                    }
+
+                    RoundState.Y -> {
+                        SecondChoice.Y
+                    }
+
+                    RoundState.Z -> {
+                        SecondChoice.Z
                     }
                 }
             }
             FirstChoice.C -> {
-                return when (secondChoice) {
-                    SecondChoice.X -> {
-                        RoundState.WIN
+                return when (outcome) {
+                    RoundState.X -> {
+                        SecondChoice.Y
                     }
 
-                    SecondChoice.Y -> {
-                        RoundState.LOSS
+                    RoundState.Y -> {
+                        SecondChoice.Z
                     }
 
-                    SecondChoice.Z -> {
-                        RoundState.DRAW
+                    RoundState.Z -> {
+                        SecondChoice.X
                     }
                 }
             }
         }
     }
 
+    // TODO: Update enums with printable names
     enum class RoundState : IChoiceScore {
-        WIN {
-            override fun getScore() = 6
-        },
-        LOSS {
+        // Loss
+        X {
             override fun getScore() = 0
         },
-        DRAW {
+        // Draw
+        Y {
             override fun getScore() = 3
+        },
+        // Win
+        Z {
+            override fun getScore() = 6
         }
     }
 
     enum class FirstChoice : IChoiceScore {
+        // Rock
         A {
             override fun getScore() = 1
         },
+        // Paper
         B {
             override fun getScore() = 2
         },
+        // Scissors
         C {
             override fun getScore() = 3
         }
     }
 
     enum class SecondChoice : IChoiceScore {
+        // Rock
         X {
             override fun getScore() = 1
         },
+        // Paper
         Y {
             override fun getScore() = 2
         },
+        // Scissors
         Z {
             override fun getScore() = 3
         }

@@ -22,7 +22,7 @@ class AoC_2022_02_Test {
     fun givenTestData_whenExecute_thenCorrectSecondScoreReturned() {
         setup()
 
-        val expected = 15
+        val expected = 12
         val score = this.solution.getSecondScore()
 
         TestCase.assertEquals(expected, score)
