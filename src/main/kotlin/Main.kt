@@ -1,14 +1,20 @@
 fun main() {
+    println("Problem 1")
     val solution1 = solution1()
 
-    // Part 1
+    println("Part 1")
     println("Max total: " + solution1.getMaxTotal())
-    println("Elf with max total: " + solution1.getElfWithMaxTotal())
 
-    // Part 2
+    println("Part 2")
     val topThreeTotals = solution1.getTopThreeTotals()
     println("Top three: $topThreeTotals")
     println("Top three total calories: " + topThreeTotals.sum())
+    println()
+
+    println("Problem 2")
+    val solution2 = solution2()
+    println("Final score: " + solution2.getFinalScore())
+    println()
 }
 
 fun solution1 (): AoC_2022_01 {

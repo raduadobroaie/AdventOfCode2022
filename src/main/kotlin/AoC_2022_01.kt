@@ -11,6 +11,7 @@ class AoC_2022_01(private val fileName: String) {
         val file = File(fileName)
 
         BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeCurrentTotal) }
+
         allTotals.sortDescending()
     }
 
@@ -25,10 +26,6 @@ class AoC_2022_01(private val fileName: String) {
 
     fun getMaxTotal (): Int {
         return this.allTotals[0]
-    }
-
-    fun getElfWithMaxTotal () : Int {
-        return this.allTotals.indexOf(getMaxTotal())
     }
 
     fun getTopThreeTotals () : List<Int> {
