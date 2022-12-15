@@ -8,7 +8,7 @@ class AoC_2022_01(private val fileName: String) {
     private var currentTotal = 0
 
     fun execute() {
-        val file = File(fileName)
+        val file = File(this.fileName)
 
         BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeCurrentTotal) }
 

@@ -2,14 +2,14 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 
-class AoC_2022_02 (private val input: String) {
+class AoC_2022_02 (private val fileName: String) {
 
     private var score = 0
     private var secondScore = 0
     private var roundCounter = 1
 
     fun execute() {
-        val file = File(input)
+        val file = File(this.fileName)
 
         BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeScores) }
     }
