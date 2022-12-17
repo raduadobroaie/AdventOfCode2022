@@ -36,5 +36,7 @@ fun aocProblem3 () {
 
     println("Part 1")
     println("Total priority: " + solution.getTotalPriority())
+    println("Part 2")
+    println("Total badge priority: " + solution.geTotalBadgePriority())
     println()
 }
