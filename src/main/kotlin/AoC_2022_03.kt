@@ -12,7 +12,7 @@ class AoC_2022_03(private val fileName: String) {
     fun execute() {
         val file = File(this.fileName)
 
-        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::updatePriorities)}
+        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::solve)}
     }
 
     fun getTotalPriority(): Int {
@@ -23,7 +23,7 @@ class AoC_2022_03(private val fileName: String) {
         return this.totalBadgePriority
     }
 
-    private fun updatePriorities(line: String) {
+    private fun solve(line: String) {
         val chars = line.toList()
 
         updateBadgePriority(chars)

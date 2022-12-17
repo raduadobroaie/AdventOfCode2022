@@ -10,12 +10,12 @@ class AoC_2022_01(private val fileName: String) {
     fun execute() {
         val file = File(this.fileName)
 
-        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeCurrentTotal) }
+        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::solve) }
 
         allTotals.sortDescending()
     }
 
-    private fun computeCurrentTotal(line:String) {
+    private fun solve(line:String) {
         if (line.isBlank()) {
             this.allTotals.add(currentTotal)
             this.currentTotal = 0

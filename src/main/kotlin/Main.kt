@@ -1,7 +1,8 @@
 fun main() {
-    aocProblem1()
-    aocProblem2()
-    aocProblem3()
+//    aocProblem1()
+//    aocProblem2()
+//    aocProblem3()
+    aocProblem4()
 }
 
 fun aocProblem1 () {
@@ -38,5 +39,16 @@ fun aocProblem3 () {
     println("Total priority: " + solution.getTotalPriority())
     println("Part 2")
     println("Total badge priority: " + solution.geTotalBadgePriority())
+    println()
+}
+fun aocProblem4 () {
+    println("Problem 4")
+    val solution = AoC_2022_04("src/main/kotlin/data/inputFile4")
+    solution.execute()
+
+    println("Part 1")
+    println("Redundant pairs: " + solution.getRedundantPairs())
+    println("Part 2")
+    println("Total overlaps: " + solution.getTotalOverlaps())
     println()
 }

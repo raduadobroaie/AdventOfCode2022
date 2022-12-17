@@ -11,7 +11,7 @@ class AoC_2022_02 (private val fileName: String) {
     fun execute() {
         val file = File(this.fileName)
 
-        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::computeScores) }
+        BufferedReader(FileReader(file)).use { br -> br.lines().forEach(::solve) }
     }
 
     fun getFinalScore(): Int {
@@ -22,7 +22,7 @@ class AoC_2022_02 (private val fileName: String) {
         return this.secondScore
     }
 
-    private fun computeScores(line: String) {
+    private fun solve(line: String) {
         val choices = line.split(' ')
 
         val firstChoice = FirstChoice.valueOf(choices[0])
